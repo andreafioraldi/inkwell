@@ -45,7 +45,7 @@ pub struct MetadataValue<'ctx> {
 }
 
 impl<'ctx> MetadataValue<'ctx> {
-    pub(crate) unsafe fn new(value: LLVMValueRef) -> Self {
+    pub unsafe fn new(value: LLVMValueRef) -> Self {
         assert!(!value.is_null());
         assert!(!LLVMIsAMDNode(value).is_null() || !LLVMIsAMDString(value).is_null());
 
@@ -55,7 +55,7 @@ impl<'ctx> MetadataValue<'ctx> {
     }
 
     #[llvm_versions(7.0..=latest)]
-    pub(crate) fn as_metadata_ref(self) -> LLVMMetadataRef {
+    pub fn as_metadata_ref(self) -> LLVMMetadataRef {
         unsafe {
             LLVMValueAsMetadata(self.as_value_ref())
         }

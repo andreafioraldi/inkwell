@@ -97,11 +97,11 @@ impl Default for InitializationConfig {
 
 #[derive(Eq)]
 pub struct TargetTriple {
-    pub(crate) triple: LLVMString,
+    pub triple: LLVMString,
 }
 
 impl TargetTriple {
-    pub(crate) fn new(triple: LLVMString) -> TargetTriple {
+    pub fn new(triple: LLVMString) -> TargetTriple {
         TargetTriple {
             triple,
         }
@@ -994,7 +994,7 @@ impl Target {
         Self::from_name_raw(c_string.as_ptr())
     }
 
-    pub(crate) fn from_name_raw(c_string: *const ::libc::c_char) -> Option<Self> {
+    pub fn from_name_raw(c_string: *const ::libc::c_char) -> Option<Self> {
         let target = {
             let _guard = TARGET_LOCK.read();
             unsafe { LLVMGetTargetFromName(c_string) }
@@ -1044,7 +1044,7 @@ impl Target {
 
 #[derive(Debug)]
 pub struct TargetMachine {
-    pub(crate) target_machine: LLVMTargetMachineRef,
+    pub target_machine: LLVMTargetMachineRef,
 }
 
 impl TargetMachine {
@@ -1297,11 +1297,11 @@ pub enum ByteOrdering {
 
 #[derive(PartialEq, Eq, Debug)]
 pub struct TargetData {
-    pub(crate) target_data: LLVMTargetDataRef,
+    pub target_data: LLVMTargetDataRef,
 }
 
 impl TargetData {
-    pub(crate) unsafe fn new(target_data: LLVMTargetDataRef) -> TargetData {
+    pub unsafe fn new(target_data: LLVMTargetDataRef) -> TargetData {
         assert!(!target_data.is_null());
 
         TargetData {

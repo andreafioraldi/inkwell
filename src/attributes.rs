@@ -18,12 +18,12 @@ use crate::types::AnyTypeEnum;
 #[llvm_versions(3.9..=latest)]
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Attribute {
-    pub(crate) attribute: LLVMAttributeRef,
+    pub attribute: LLVMAttributeRef,
 }
 
 #[llvm_versions(3.9..=latest)]
 impl Attribute {
-    pub(crate) unsafe fn new(attribute: LLVMAttributeRef) -> Self {
+    pub unsafe fn new(attribute: LLVMAttributeRef) -> Self {
         debug_assert!(!attribute.is_null());
 
         Attribute {
@@ -261,7 +261,7 @@ pub enum AttributeLoc {
 }
 
 impl AttributeLoc {
-    pub(crate) fn get_index(self) -> u32 {
+    pub fn get_index(self) -> u32 {
         match self {
             AttributeLoc::Return => 0,
             AttributeLoc::Param(index) => {

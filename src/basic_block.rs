@@ -21,12 +21,12 @@ use std::marker::PhantomData;
 /// when constructing or modifying a program.
 #[derive(PartialEq, Eq, Clone, Copy, Hash)]
 pub struct BasicBlock<'ctx> {
-    pub(crate) basic_block: LLVMBasicBlockRef,
+    pub basic_block: LLVMBasicBlockRef,
     _marker: PhantomData<&'ctx ()>,
 }
 
 impl<'ctx> BasicBlock<'ctx> {
-    pub(crate) unsafe fn new(basic_block: LLVMBasicBlockRef) -> Option<Self> {
+    pub unsafe fn new(basic_block: LLVMBasicBlockRef) -> Option<Self> {
         if basic_block.is_null() {
             return None;
         }

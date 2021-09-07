@@ -12,11 +12,11 @@ use std::slice;
 
 #[derive(Debug)]
 pub struct MemoryBuffer {
-    pub(crate) memory_buffer: LLVMMemoryBufferRef
+    pub memory_buffer: LLVMMemoryBufferRef
 }
 
 impl MemoryBuffer {
-    pub(crate) fn new(memory_buffer: LLVMMemoryBufferRef) -> Self {
+    pub fn new(memory_buffer: LLVMMemoryBufferRef) -> Self {
         assert!(!memory_buffer.is_null());
 
         MemoryBuffer {

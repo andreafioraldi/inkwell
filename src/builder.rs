@@ -27,7 +27,7 @@ pub struct Builder<'ctx> {
 }
 
 impl<'ctx> Builder<'ctx> {
-    pub(crate) unsafe fn new(builder: LLVMBuilderRef) -> Self {
+    pub unsafe fn new(builder: LLVMBuilderRef) -> Self {
         debug_assert!(!builder.is_null());
 
         Builder {

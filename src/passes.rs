@@ -216,7 +216,7 @@ impl<'ctx> PassManagerSubType for FunctionValue<'ctx> {
 /// documentation](https://llvm.org/docs/Passes.html).
 #[derive(Debug)]
 pub struct PassManager<T> {
-    pub(crate) pass_manager: LLVMPassManagerRef,
+    pub pass_manager: LLVMPassManagerRef,
     sub_type: PhantomData<T>,
 }
 
@@ -236,7 +236,7 @@ impl PassManager<FunctionValue<'_>> {
 }
 
 impl<T: PassManagerSubType> PassManager<T> {
-    pub(crate) fn new(pass_manager: LLVMPassManagerRef) -> Self {
+    pub fn new(pass_manager: LLVMPassManagerRef) -> Self {
         assert!(!pass_manager.is_null());
 
         PassManager {

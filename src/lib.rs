@@ -68,6 +68,9 @@ extern crate llvm_sys_110 as llvm_sys;
 #[cfg(feature="llvm12-0")]
 extern crate llvm_sys_120 as llvm_sys;
 
+// Expose the underlying llvm_sys to the users
+pub use llvm_sys;
+
 use llvm_sys::{LLVMIntPredicate, LLVMRealPredicate, LLVMVisibility, LLVMThreadLocalMode, LLVMDLLStorageClass, LLVMAtomicOrdering, LLVMAtomicRMWBinOp};
 
 #[llvm_versions(7.0..=latest)]
@@ -379,7 +382,7 @@ pub enum ThreadLocalMode {
 }
 
 impl ThreadLocalMode {
-    pub(crate) fn new(thread_local_mode: LLVMThreadLocalMode) -> Option<Self> {
+    pub fn new(thread_local_mode: LLVMThreadLocalMode) -> Option<Self> {
         match thread_local_mode {
             LLVMThreadLocalMode::LLVMGeneralDynamicTLSModel => Some(ThreadLocalMode::GeneralDynamicTLSModel),
             LLVMThreadLocalMode::LLVMLocalDynamicTLSModel => Some(ThreadLocalMode::LocalDynamicTLSModel),
@@ -389,7 +392,7 @@ impl ThreadLocalMode {
         }
     }
 
-    pub(crate) fn as_llvm_mode(self) -> LLVMThreadLocalMode {
+    pub fn as_llvm_mode(self) -> LLVMThreadLocalMode {
         match self {
             ThreadLocalMode::GeneralDynamicTLSModel => LLVMThreadLocalMode::LLVMGeneralDynamicTLSModel,
             ThreadLocalMode::LocalDynamicTLSModel => LLVMThreadLocalMode::LLVMLocalDynamicTLSModel,

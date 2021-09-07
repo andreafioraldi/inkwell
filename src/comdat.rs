@@ -28,10 +28,10 @@ pub enum ComdatSelectionKind {
 
 /// A `Comdat` determines how to resolve duplicate sections when linking.
 #[derive(Debug, PartialEq, Copy, Clone)]
-pub struct Comdat(pub(crate) LLVMComdatRef);
+pub struct Comdat(pub LLVMComdatRef);
 
 impl Comdat {
-    pub(crate) fn new(comdat: LLVMComdatRef) -> Self {
+    pub fn new(comdat: LLVMComdatRef) -> Self {
         debug_assert!(!comdat.is_null());
 
         Comdat(comdat)

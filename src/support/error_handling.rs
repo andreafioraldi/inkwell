@@ -33,24 +33,24 @@ pub fn reset_fatal_error_handler() {
     }
 }
 
-pub(crate) struct DiagnosticInfo {
+pub struct DiagnosticInfo {
     diagnostic_info: LLVMDiagnosticInfoRef,
 }
 
 impl DiagnosticInfo {
-    pub(crate) fn new(diagnostic_info: LLVMDiagnosticInfoRef) -> Self {
+    pub fn new(diagnostic_info: LLVMDiagnosticInfoRef) -> Self {
         DiagnosticInfo {
             diagnostic_info,
         }
     }
 
-    pub(crate) fn get_description(&self) -> *mut ::libc::c_char {
+    pub fn get_description(&self) -> *mut ::libc::c_char {
         unsafe {
             LLVMGetDiagInfoDescription(self.diagnostic_info)
         }
     }
 
-    pub(crate) fn severity_is_error(&self) -> bool {
+    pub fn severity_is_error(&self) -> bool {
         unsafe {
             match LLVMGetDiagInfoSeverity(self.diagnostic_info) {
                 LLVMDiagnosticSeverity::LLVMDSError => true,
@@ -65,7 +65,7 @@ impl DiagnosticInfo {
 //
 // https://github.com/llvm-mirror/llvm/blob/master/tools/llvm-c-test/diagnostic.c was super useful
 // for figuring out how to get this to work
-pub(crate) extern "C" fn get_error_str_diagnostic_handler(diagnostic_info: LLVMDiagnosticInfoRef, void_ptr: *mut c_void) {
+pub extern "C" fn get_error_str_diagnostic_handler(diagnostic_info: LLVMDiagnosticInfoRef, void_ptr: *mut c_void) {
     let diagnostic_info = DiagnosticInfo::new(diagnostic_info);
 
     if diagnostic_info.severity_is_error() {

@@ -14,11 +14,11 @@ use std::ops::Deref;
 /// An owned LLVM String. Also known as a LLVM Message
 #[derive(Eq)]
 pub struct LLVMString {
-    pub(crate) ptr: *const c_char,
+    pub ptr: *const c_char,
 }
 
 impl LLVMString {
-    pub(crate) unsafe fn new(ptr: *const c_char) -> Self {
+    pub unsafe fn new(ptr: *const c_char) -> Self {
         LLVMString {
             ptr,
         }
@@ -34,14 +34,14 @@ impl LLVMString {
     }
 
     /// This method will allocate a c string through LLVM
-    pub(crate) fn create_from_c_str(string: &CStr) -> LLVMString {
+    pub fn create_from_c_str(string: &CStr) -> LLVMString {
         unsafe {
             LLVMString::new(LLVMCreateMessage(string.as_ptr() as *const _))
         }
     }
 
     /// This method will allocate a c string through LLVM
-    pub(crate) fn create_from_str(string: &str) -> LLVMString {
+    pub fn create_from_str(string: &str) -> LLVMString {
         debug_assert_eq!(string.as_bytes()[string.as_bytes().len() - 1], 0);
 
         unsafe {
@@ -101,7 +101,7 @@ impl Drop for LLVMString {
 // too. This is meant to be an internal wrapper only. Maybe
 // belongs in a private utils module.
 #[derive(Eq)]
-pub(crate) enum LLVMStringOrRaw {
+pub enum LLVMStringOrRaw {
     Owned(LLVMString),
     Borrowed(*const c_char),
 }
@@ -165,7 +165,7 @@ pub fn enable_llvm_pretty_stack_trace() {
 /// A) Finds a terminating null byte in the Rust string and can reference it directly like a C string.
 ///
 /// B) Finds no null byte and allocates a new C string based on the input Rust string.
-pub(crate) fn to_c_str<'s>(mut s: &'s str) -> Cow<'s, CStr> {
+pub fn to_c_str<'s>(mut s: &'s str) -> Cow<'s, CStr> {
     if s.is_empty() {
         s = "\0";
     }

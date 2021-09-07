@@ -8,12 +8,12 @@ use std::marker::PhantomData;
 // SubTypes: GenericValue<IntValue, FloatValue, or PointerValue>
 #[derive(Debug)]
 pub struct GenericValue<'ctx> {
-    pub(crate) generic_value: LLVMGenericValueRef,
+    pub generic_value: LLVMGenericValueRef,
     _phantom: PhantomData<&'ctx ()>,
 }
 
 impl<'ctx> GenericValue<'ctx> {
-    pub(crate) unsafe fn new(generic_value: LLVMGenericValueRef) -> Self {
+    pub unsafe fn new(generic_value: LLVMGenericValueRef) -> Self {
         assert!(!generic_value.is_null());
 
         GenericValue {

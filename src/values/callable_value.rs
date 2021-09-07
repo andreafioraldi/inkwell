@@ -90,7 +90,7 @@ impl<'ctx> AsValueRef for CallableValue<'ctx> {
 impl<'ctx> AnyValue<'ctx> for CallableValue<'ctx> {}
 
 impl<'ctx> CallableValue<'ctx> {
-    pub(crate) fn returns_void(&self) -> bool {
+    pub fn returns_void(&self) -> bool {
         let return_type = unsafe {
             LLVMGetTypeKind(LLVMGetReturnType(LLVMGetElementType(LLVMTypeOf(self.as_value_ref()))))
         };

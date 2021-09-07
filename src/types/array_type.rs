@@ -14,7 +14,7 @@ pub struct ArrayType<'ctx> {
 }
 
 impl<'ctx> ArrayType<'ctx> {
-    pub(crate) unsafe fn new(array_type: LLVMTypeRef) -> Self {
+    pub unsafe fn new(array_type: LLVMTypeRef) -> Self {
         assert!(!array_type.is_null());
 
         ArrayType {

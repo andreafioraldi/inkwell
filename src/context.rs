@@ -48,7 +48,7 @@ static GLOBAL_CTX: Lazy<Mutex<Context>> = Lazy::new(|| unsafe {
 });
 
 thread_local! {
-    pub(crate) static GLOBAL_CTX_LOCK: Lazy<MutexGuard<'static, Context>> = Lazy::new(|| {
+    pub static GLOBAL_CTX_LOCK: Lazy<MutexGuard<'static, Context>> = Lazy::new(|| {
         GLOBAL_CTX.lock()
     });
 }
@@ -59,13 +59,13 @@ thread_local! {
 /// can, however, execute on different threads simultaneously according to the LLVM docs.
 #[derive(Debug, PartialEq, Eq)]
 pub struct Context {
-    pub(crate) context: LLVMContextRef,
+    pub context: LLVMContextRef,
 }
 
 unsafe impl Send for Context {}
 
 impl Context {
-    pub(crate) unsafe fn new(context: LLVMContextRef) -> Self {
+    pub unsafe fn new(context: LLVMContextRef) -> Self {
         assert!(!context.is_null());
 
         Context {
@@ -963,7 +963,7 @@ impl Context {
         }
     }
 
-    pub(crate) fn set_diagnostic_handler(&self, handler: extern "C" fn (LLVMDiagnosticInfoRef, *mut c_void), void_ptr: *mut c_void) {
+    pub fn set_diagnostic_handler(&self, handler: extern "C" fn (LLVMDiagnosticInfoRef, *mut c_void), void_ptr: *mut c_void) {
         unsafe {
             LLVMContextSetDiagnosticHandler(self.context, Some(handler), void_ptr)
         }
@@ -986,7 +986,7 @@ pub struct ContextRef<'ctx> {
 }
 
 impl<'ctx> ContextRef<'ctx> {
-    pub(crate) unsafe fn new(context: LLVMContextRef) -> Self {
+    pub unsafe fn new(context: LLVMContextRef) -> Self {
         ContextRef {
             context: ManuallyDrop::new(Context::new(context)),
             _marker: PhantomData,

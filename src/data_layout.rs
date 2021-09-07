@@ -5,11 +5,11 @@ use crate::support::{LLVMString, LLVMStringOrRaw};
 
 #[derive(Eq)]
 pub struct DataLayout {
-    pub(crate) data_layout: LLVMStringOrRaw,
+    pub data_layout: LLVMStringOrRaw,
 }
 
 impl DataLayout {
-    pub(crate) unsafe fn new_owned(data_layout: *const ::libc::c_char) -> DataLayout {
+    pub unsafe fn new_owned(data_layout: *const ::libc::c_char) -> DataLayout {
         debug_assert!(!data_layout.is_null());
 
         DataLayout {
@@ -17,7 +17,7 @@ impl DataLayout {
         }
     }
 
-    pub(crate) unsafe fn new_borrowed(data_layout: *const ::libc::c_char) -> DataLayout {
+    pub unsafe fn new_borrowed(data_layout: *const ::libc::c_char) -> DataLayout {
         debug_assert!(!data_layout.is_null());
 
         DataLayout {

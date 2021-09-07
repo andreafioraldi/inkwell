@@ -13,7 +13,7 @@ pub struct VectorType<'ctx> {
 }
 
 impl<'ctx> VectorType<'ctx> {
-    pub(crate) unsafe fn new(vector_type: LLVMTypeRef) -> Self {
+    pub unsafe fn new(vector_type: LLVMTypeRef) -> Self {
         assert!(!vector_type.is_null());
 
         VectorType {

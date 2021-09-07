@@ -41,7 +41,7 @@ pub use crate::values::struct_value::StructValue;
 pub use crate::values::callable_value::CallableValue;
 pub use crate::values::traits::{AnyValue, AggregateValue, BasicValue, IntMathValue, FloatMathValue, PointerMathValue};
 pub use crate::values::vec_value::VectorValue;
-pub(crate) use crate::values::traits::AsValueRef;
+pub use crate::values::traits::AsValueRef;
 
 use llvm_sys::core::{LLVMIsConstant, LLVMIsNull, LLVMIsUndef, LLVMPrintTypeToString, LLVMPrintValueToString, LLVMTypeOf, LLVMDumpValue, LLVMIsAInstruction, LLVMReplaceAllUsesWith, LLVMGetFirstUse};
 use llvm_sys::prelude::{LLVMValueRef, LLVMTypeRef};
@@ -57,7 +57,7 @@ struct Value<'ctx> {
 }
 
 impl<'ctx> Value<'ctx> {
-    pub(crate) unsafe fn new(value: LLVMValueRef) -> Self {
+    pub unsafe fn new(value: LLVMValueRef) -> Self {
         debug_assert!(!value.is_null(), "This should never happen since containing struct should check null ptrs");
 
         Value {

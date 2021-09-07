@@ -90,7 +90,7 @@ pub struct ExecutionEngine<'ctx> {
 }
 
 impl<'ctx> ExecutionEngine<'ctx> {
-    pub(crate) unsafe fn new(
+    pub unsafe fn new(
         execution_engine: Rc<LLVMExecutionEngineRef>,
         jit_mode: bool,
     ) -> Self {
@@ -106,12 +106,12 @@ impl<'ctx> ExecutionEngine<'ctx> {
         }
     }
 
-    pub(crate) fn execution_engine_rc(&self) -> &Rc<LLVMExecutionEngineRef> {
+    pub fn execution_engine_rc(&self) -> &Rc<LLVMExecutionEngineRef> {
         &self.execution_engine.as_ref().expect(EE_INNER_PANIC).0
     }
 
     #[inline]
-    pub(crate) fn execution_engine_inner(&self) -> LLVMExecutionEngineRef {
+    pub fn execution_engine_inner(&self) -> LLVMExecutionEngineRef {
         **self.execution_engine_rc()
     }
 

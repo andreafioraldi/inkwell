@@ -30,7 +30,7 @@ pub use crate::types::struct_type::StructType;
 pub use crate::types::traits::{AnyType, BasicType, IntMathType, FloatMathType, PointerMathType};
 pub use crate::types::vec_type::VectorType;
 pub use crate::types::void_type::VoidType;
-pub(crate) use crate::types::traits::AsTypeRef;
+pub use crate::types::traits::AsTypeRef;
 
 #[llvm_versions(3.7..=4.0)]
 use llvm_sys::core::LLVMDumpType;

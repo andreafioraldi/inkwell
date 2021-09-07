@@ -16,7 +16,7 @@ pub struct PointerType<'ctx> {
 }
 
 impl<'ctx> PointerType<'ctx> {
-    pub(crate) unsafe fn new(ptr_type: LLVMTypeRef) -> Self {
+    pub unsafe fn new(ptr_type: LLVMTypeRef) -> Self {
         assert!(!ptr_type.is_null());
 
         PointerType {

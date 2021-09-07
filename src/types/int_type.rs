@@ -61,7 +61,7 @@ pub struct IntType<'ctx> {
 }
 
 impl<'ctx> IntType<'ctx> {
-    pub(crate) unsafe fn new(int_type: LLVMTypeRef) -> Self {
+    pub unsafe fn new(int_type: LLVMTypeRef) -> Self {
         assert!(!int_type.is_null());
 
         IntType {

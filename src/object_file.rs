@@ -11,7 +11,7 @@ pub struct ObjectFile {
 }
 
 impl ObjectFile {
-    pub(crate) fn new(object_file: LLVMObjectFileRef) -> Self {
+    pub fn new(object_file: LLVMObjectFileRef) -> Self {
         assert!(!object_file.is_null());
 
         ObjectFile {

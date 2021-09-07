@@ -142,7 +142,7 @@ pub fn debug_metadata_version() -> libc::c_uint {
 /// documentation for more.
 #[derive(Debug, PartialEq, Eq)]
 pub struct DebugInfoBuilder<'ctx> {
-    pub(crate) builder: LLVMDIBuilderRef,
+    pub builder: LLVMDIBuilderRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -162,7 +162,7 @@ pub trait AsDIScope<'ctx> {
 }
 
 impl<'ctx> DebugInfoBuilder<'ctx> {
-    pub(crate) fn new(
+    pub fn new(
         module: &Module,
         allow_unresolved: bool,
         language: DWARFSourceLanguage,
@@ -916,7 +916,7 @@ impl<'ctx> Drop for DebugInfoBuilder<'ctx> {
 /// Source file scope for debug info
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DIFile<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -933,7 +933,7 @@ impl<'ctx> AsDIScope<'ctx> for DIFile<'ctx> {
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DICompileUnit<'ctx> {
     file: DIFile<'ctx>,
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -955,7 +955,7 @@ impl<'ctx> AsDIScope<'ctx> for DICompileUnit<'ctx> {
 /// Namespace scope for debug info
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DINamespace<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -971,8 +971,8 @@ impl<'ctx> AsDIScope<'ctx> for DINamespace<'ctx> {
 /// Function body scope for debug info
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DISubprogram<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
-    pub(crate) _marker: PhantomData<&'ctx Context>,
+    pub metadata_ref: LLVMMetadataRef,
+    pub _marker: PhantomData<&'ctx Context>,
 }
 
 impl<'ctx> AsDIScope<'ctx> for DISubprogram<'ctx> {
@@ -987,7 +987,7 @@ impl<'ctx> AsDIScope<'ctx> for DISubprogram<'ctx> {
 /// Any kind of debug info type
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DIType<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -1017,7 +1017,7 @@ impl<'ctx> AsDIScope<'ctx> for DIType<'ctx> {
 /// A wrapper around a single type, such as a typedef or member type.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DIDerivedType<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -1042,7 +1042,7 @@ impl<'ctx> AsDIScope<'ctx> for DIDerivedType<'ctx> {
 /// A primitive debug info type created by `create_basic_type` method of `DebugInfoBuilder`
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DIBasicType<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -1066,7 +1066,7 @@ impl<'ctx> AsDIScope<'ctx> for DIBasicType<'ctx> {
 /// A wrapper around an array of types, such as a union or struct.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DICompositeType<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -1091,14 +1091,14 @@ impl<'ctx> AsDIScope<'ctx> for DICompositeType<'ctx> {
 /// Metadata representing the type of a function
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DISubroutineType<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
 /// Lexical block scope for debug info
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DILexicalBlock<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -1121,8 +1121,8 @@ impl<'ctx> AsDIScope<'ctx> for DILexicalBlock<'ctx> {
 /// `set_current_debug_location` of `Builder`.
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DILocation<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
-    pub(crate) _marker: PhantomData<&'ctx Context>,
+    pub metadata_ref: LLVMMetadataRef,
+    pub _marker: PhantomData<&'ctx Context>,
 }
 
 impl<'ctx> DILocation<'ctx> {
@@ -1145,13 +1145,13 @@ impl<'ctx> DILocation<'ctx> {
 /// Metadata representing a variable inside a scope
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DILocalVariable<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DIGlobalVariableExpression<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
@@ -1166,7 +1166,7 @@ impl <'ctx> DIGlobalVariableExpression<'ctx>  {
 /// https://llvm.org/docs/LangRef.html#diexpression
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct DIExpression<'ctx> {
-    pub(crate) metadata_ref: LLVMMetadataRef,
+    pub metadata_ref: LLVMMetadataRef,
     _marker: PhantomData<&'ctx Context>,
 }
 
