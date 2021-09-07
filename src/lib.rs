@@ -41,35 +41,33 @@ pub mod types;
 pub mod values;
 
 // Boilerplate to select a desired llvm_sys version at compile & link time.
-#[cfg(feature="llvm3-6")]
-extern crate llvm_sys_36 as llvm_sys;
-#[cfg(feature="llvm3-7")]
-extern crate llvm_sys_37 as llvm_sys;
-#[cfg(feature="llvm3-8")]
-extern crate llvm_sys_38 as llvm_sys;
-#[cfg(feature="llvm3-9")]
-extern crate llvm_sys_39 as llvm_sys;
-#[cfg(feature="llvm4-0")]
-extern crate llvm_sys_40 as llvm_sys;
-#[cfg(feature="llvm5-0")]
-extern crate llvm_sys_50 as llvm_sys;
-#[cfg(feature="llvm6-0")]
-extern crate llvm_sys_60 as llvm_sys;
-#[cfg(feature="llvm7-0")]
-extern crate llvm_sys_70 as llvm_sys;
-#[cfg(feature="llvm8-0")]
-extern crate llvm_sys_80 as llvm_sys;
-#[cfg(feature="llvm9-0")]
-extern crate llvm_sys_90 as llvm_sys;
-#[cfg(feature="llvm10-0")]
-extern crate llvm_sys_100 as llvm_sys;
-#[cfg(feature="llvm11-0")]
-extern crate llvm_sys_110 as llvm_sys;
-#[cfg(feature="llvm12-0")]
-extern crate llvm_sys_120 as llvm_sys;
-
 // Expose the underlying llvm_sys to the users
-pub use llvm_sys;
+#[cfg(feature="llvm3-6")]
+pub extern crate llvm_sys_36 as llvm_sys;
+#[cfg(feature="llvm3-7")]
+pub extern crate llvm_sys_37 as llvm_sys;
+#[cfg(feature="llvm3-8")]
+pub extern crate llvm_sys_38 as llvm_sys;
+#[cfg(feature="llvm3-9")]
+pub extern crate llvm_sys_39 as llvm_sys;
+#[cfg(feature="llvm4-0")]
+pub extern crate llvm_sys_40 as llvm_sys;
+#[cfg(feature="llvm5-0")]
+pub extern crate llvm_sys_50 as llvm_sys;
+#[cfg(feature="llvm6-0")]
+pub extern crate llvm_sys_60 as llvm_sys;
+#[cfg(feature="llvm7-0")]
+pub extern crate llvm_sys_70 as llvm_sys;
+#[cfg(feature="llvm8-0")]
+pub extern crate llvm_sys_80 as llvm_sys;
+#[cfg(feature="llvm9-0")]
+pub extern crate llvm_sys_90 as llvm_sys;
+#[cfg(feature="llvm10-0")]
+pub extern crate llvm_sys_100 as llvm_sys;
+#[cfg(feature="llvm11-0")]
+pub extern crate llvm_sys_110 as llvm_sys;
+#[cfg(feature="llvm12-0")]
+pub extern crate llvm_sys_120 as llvm_sys;
 
 use llvm_sys::{LLVMIntPredicate, LLVMRealPredicate, LLVMVisibility, LLVMThreadLocalMode, LLVMDLLStorageClass, LLVMAtomicOrdering, LLVMAtomicRMWBinOp};
 
